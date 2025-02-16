@@ -7,6 +7,7 @@ public class Main
     {
        amocana1();
        amocana2();
+       amocana3();
     }
 
     public static void amocana1()
@@ -84,6 +85,42 @@ public class Main
             opera1.close();
 
             objectInputStream.close();
+        }
+        catch (IOException | ClassNotFoundException e)
+        {
+            throw new RuntimeException(e);
+        }
+    }
+
+    public static void amocana3()
+    {
+        try
+        {
+            Account account1 = new Account("NapoleonBonaparte@Icloud.com", "General", "password1", 1515);
+            Account account2 = new Account("DukeOfWellington@Gmail.com", "The Conquerer", "password2");
+            Account account3 = new Account("CharlesOliviera@Yahoo.com", "Do Bronx", "password3");
+
+            ArrayList<Account> accounts = new ArrayList<>();
+
+            accounts.add(account1);
+            accounts.add(account2);
+            accounts.add(account3);
+
+            FileOutputStream fileOutputStream = new FileOutputStream("C:\\Users\\User\\Desktop\\BxB.txt");
+            BufferedOutputStream bufferedOutputStream = new BufferedOutputStream(fileOutputStream);
+            ObjectOutputStream objectOutputStream = new ObjectOutputStream(bufferedOutputStream);
+
+            objectOutputStream.writeObject(accounts);
+            objectOutputStream.close();
+
+            FileInputStream fileInputStream = new FileInputStream("C:\\Users\\User\\Desktop\\BxB.txt");
+            BufferedInputStream bufferedInputStream = new BufferedInputStream(fileInputStream);
+            ObjectInputStream objectInputStream = new ObjectInputStream(bufferedInputStream);
+
+            ArrayList<Account> accounts3 = (ArrayList<Account>) objectInputStream.readObject();
+            objectInputStream.close();
+
+            System.out.println(accounts3);
         }
         catch (IOException | ClassNotFoundException e)
         {
